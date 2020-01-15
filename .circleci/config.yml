@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  test:
+    machine: true
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: |
+            docker-compose up -d
+            docker-compose exec application yarn test
+
+  deploy:
+    machine: true
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - deploy:
+          name: Deploy to Heroku
+          command: |
+            docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
+            curl https://cli-assets.heroku.com/install.sh | sh
+            heroku container:push web -a $HEROKU_APP_NAME
+            heroku container:release web -a $HEROKU_APP_NAME
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sample
+    command: mysqld
+    ports:
+      - "3306:3306"
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npx ts-node-dev --poll src/index.ts
+    volumes:
+      - ./src:/home/circleci/application/src
+      - ./__tests__:/home/circleci/application/__tests__
+    ports:
+      - "9000:9000"

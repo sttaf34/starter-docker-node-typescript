@@ -1,0 +1,53 @@
+{
+  "name": "starter-docker-node-typescript-etc",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "mysql": "^2.17.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.6.1",
+    "typeorm": "^0.2.22"
+  },
+  "scripts": {
+    "start": "npx ts-node src/index.ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/mysql": "^2.15.8",
+    "@types/node": "^13.1.6",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.4.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "1.7.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.3.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ]
+  }
+}

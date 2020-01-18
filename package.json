@@ -10,7 +10,12 @@
   },
   "scripts": {
     "start": "npx ts-node src/index.ts",
-    "test": "jest"
+    "develop": "npx ts-node-dev src/index.ts",
+    "test": "jest",
+    "eslint": "npx eslint --ext .ts src/",
+    "migration:generate": "npx ts-node $(npm bin)/typeorm migration:generate",
+    "migration:run": "npx ts-node $(npm bin)/typeorm migration:run",
+    "migration:revert": "npx ts-node $(npm bin)/typeorm migration:revert"
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",

@@ -23,6 +23,9 @@ module.exports = {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
+    },
+    "react": {
+      "version": "16.11"
     }
   },
   "rules": {

@@ -10,6 +10,9 @@ const connect = async (): Promise<void> => {
   const option = await getConnectionOptions()
   const connection = await createConnection(option)
   BaseEntity.useConnection(connection)
+
+  const result = await connection.manager.query("show variables like 'chara%';")
+  console.log(result)
 }
 connect()
 
@@ -22,8 +25,8 @@ const listener = (request: IncomingMessage, response: ServerResponse): void => {
     .then((): void => {
       console.log("user.save() success")
     })
-    .catch((): void => {
-      console.log("user.save() error")
+    .catch((error: Error): void => {
+      console.log(error)
     })
 
   response.end("Hello!!!")

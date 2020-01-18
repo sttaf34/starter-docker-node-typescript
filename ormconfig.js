@@ -1,5 +1,6 @@
 module.exports = {
   type: "mysql",
+  charset: "utf8mb4",
   host: process.env.MYSQL_HOST || "db",
   port: 3306,
   username: process.env.MYSQL_USER || "root",

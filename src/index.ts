@@ -1,37 +1,40 @@
 /* eslint-disable no-console */
+/* eslint-disable import/no-duplicates */
 
-import "reflect-metadata"
-import { IncomingMessage, ServerResponse, createServer } from "http"
+import * as express from "express"
+import { Request, Response, NextFunction } from "express"
+import * as helmet from "helmet"
+import * as createHttpError from "http-errors"
+import * as listEndpoints from "express-list-endpoints"
 import { getConnectionOptions, createConnection, BaseEntity } from "typeorm"
 
-import { User } from "./entity/user"
+import index from "./routes/index"
+import users from "./routes/users"
 
-const connect = async (): Promise<void> => {
+const main = async (): Promise<void> => {
+  const app = express()
+  app.use(helmet())
+
+  // DB接続
   const option = await getConnectionOptions()
   const connection = await createConnection(option)
   BaseEntity.useConnection(connection)
 
-  const result = await connection.manager.query("show variables like 'chara%';")
-  console.log(result)
-}
-connect()
+  // ルーティング設定
+  app.use("/", index)
+  app.use("/users", users)
 
-const listener = (request: IncomingMessage, response: ServerResponse): void => {
-  const user = new User()
-  user.name = "sttaf34"
-  user.age = 38
-  user
-    .save()
-    .then((): void => {
-      console.log("user.save() success")
-    })
-    .catch((error: Error): void => {
-      console.log(error)
-    })
+  // エラー処理
+  app.use((request: Request, response: Response, next: NextFunction): void => {
+    next(createHttpError(404))
+  })
 
-  response.end("Hello!!!")
+  // サーバ起動
+  const port = process.env.PORT || 9000
+  app.listen(port, (): void => {
+    console.log(`listening on port ${port}!`)
+    console.log(listEndpoints(app))
+  })
 }
 
-const server = createServer(listener)
-server.listen(process.env.PORT || 9000)
-console.log("Start serving ...")
+main()

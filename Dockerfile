@@ -6,6 +6,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 
+COPY .eslintrc.js .
 COPY ormconfig.js .
 COPY tsconfig.json .
 

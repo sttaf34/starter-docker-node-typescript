@@ -12,7 +12,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: npx ts-node-dev --poll src/index.ts
+    command: ./wait.sh npx ts-node-dev --poll src/index.ts
     volumes:
       - ./src:/home/circleci/application/src
       - ./__tests__:/home/circleci/application/__tests__

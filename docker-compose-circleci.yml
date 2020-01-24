@@ -1,0 +1,10 @@
+version: "3"
+services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c 'yarn test && yarn eslint'
+    volumes:
+      - ./src:/home/circleci/application/src
+      - ./__tests__:/home/circleci/application/__tests__

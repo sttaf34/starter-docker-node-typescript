@@ -1,15 +1,14 @@
 version: 2
 jobs:
-  test:
+  test_and_lint:
     machine: true
     working_directory: ~/workspace
     steps:
       - checkout
       - run:
-          name: Test
+          name: Test and Lint
           command: |
-            docker-compose up -d
-            docker-compose exec application yarn test
+            docker-compose -f docker-compose-circleci.yml up
 
   deploy:
     machine: true
@@ -26,12 +25,12 @@ jobs:
 
 workflows:
   version: 2
-  test_and_deploy:
+  test_lint_and_deploy:
     jobs:
-      - test
+      - test_and_lint
       - deploy:
           requires:
-            - test
+            - test_and_lint
           filters:
             branches:
               only: master

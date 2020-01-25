@@ -8,7 +8,8 @@ jobs:
       - run:
           name: Test and Lint
           command: |
-            docker-compose -f docker-compose-circleci.yml up
+            docker-compose -f docker-compose-circleci.yml run application yarn test
+            docker-compose -f docker-compose-circleci.yml run application yarn eslint
 
   deploy:
     machine: true

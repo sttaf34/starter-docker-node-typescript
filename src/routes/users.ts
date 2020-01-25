@@ -1,5 +1,5 @@
 import * as express from "express"
-import User from "../entity/user"
+import User from "../entities/user"
 
 const router = express.Router()
 

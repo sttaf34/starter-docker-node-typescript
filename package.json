@@ -7,6 +7,7 @@
     "express-list-endpoints": "^4.0.1",
     "helmet": "^3.21.2",
     "http-errors": "^1.7.3",
+    "husky": "^4.2.1",
     "mysql": "^2.17.1",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.6.1",
@@ -21,6 +22,11 @@
     "migration:generate": "npx ts-node $(npm bin)/typeorm migration:generate",
     "migration:run": "npx ts-node $(npm bin)/typeorm migration:run",
     "migration:revert": "npx ts-node $(npm bin)/typeorm migration:revert"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test && yarn eslint"
+    }
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
